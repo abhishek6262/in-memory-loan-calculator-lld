@@ -3,6 +3,8 @@ package Repositories;
 import Entities.User;
 import Storage.UserStorage;
 
+import java.util.Optional;
+
 public class UserRepository {
     private final UserStorage userStorage = UserStorage.getInstance();
 
@@ -16,7 +18,7 @@ public class UserRepository {
         return user;
     }
 
-    public <T extends User> T getWithUsername(String username) {
+    public <T extends User> Optional<T> getByUsername(String username) {
         return userStorage.get(username);
     }
 }

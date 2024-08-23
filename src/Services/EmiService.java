@@ -6,6 +6,7 @@ import Repositories.EmiRepository;
 import Repositories.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class EmiService {
     private final EmiRepository emiRepository = new EmiRepository();
@@ -29,14 +30,15 @@ public class EmiService {
     }
 
     public List<Emi> getLoanAllEmis(String username, Loan loan) {
-        if (!userRepository.exists(username)) {
+        Optional<User> user = userRepository.getByUsername(username);
+
+        if (user.isEmpty()) {
             throw new IllegalArgumentException("User does not exist");
         }
 
-        User user = userRepository.getWithUsername(username);
         Customer customer = loan.customer;
 
-        if (!(user instanceof Admin) && !customer.username.equals(username)) {
+        if (!(user.get() instanceof Admin) && !customer.username.equals(username)) {
             throw new IllegalArgumentException("User does not have permission");
         }
 

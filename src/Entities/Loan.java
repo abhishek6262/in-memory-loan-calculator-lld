@@ -1,8 +1,5 @@
 package Entities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Loan {
     public Admin admin;
 
@@ -13,8 +10,6 @@ public class Loan {
     public Float interestRate;
 
     public Integer tenureInMonths;
-
-    public List<Emi> emis = new ArrayList<>();
 
     public Loan(Admin admin, Customer customer, Float principal, Float interestRate, Integer tenureInMonths) {
         this.admin = admin;
